@@ -37,7 +37,7 @@ class RichText(AbstractItem):
     text: str = ''
     type = ItemType.TEXT
     _trunc_length = 30
-    prefix = 'TXT'
+    prefix = 'T'
 
     def __str__(self):
         if len(self.text) < self._trunc_length:
@@ -50,7 +50,7 @@ class RichText(AbstractItem):
 
 class ClocksData(AbstractItem):
     fmt: str = None
-    prefix = 'CLK'
+    prefix = 'C'
 
     type = ItemType.CLOCK
 
@@ -69,9 +69,12 @@ class Countdown(AbstractItem):
     start: float = None
     end: float = None
     format: str = None
-    is_blinked: bool = None
+    blink_before: int = -1
     type = ItemType.COUNTDOWN
-    prefix = 'CNT'
+    prefix = 'D'
+
+    # for blinking, inner counter
+    blink_counter = 0
 
     @staticmethod
     def timestamp_to_datetime(timestamp: float, fmt: str):
@@ -80,12 +83,15 @@ class Countdown(AbstractItem):
     def __str__(self):
         start = self.timestamp_to_datetime(self.start, self.format)
         end = self.timestamp_to_datetime(self.end, self.format)
-        if self.is_blinked:
-            return f'{self.prefix}: {start} - {end} - blink'
+        if self.blink_before > -1:
+            return f'{self.prefix}: {start} - {end} - blink ({self.blink_before}s)'
         return f'{self.prefix}: {start} - {end}'
 
+    def timestamp_left(self):
+        return max(int(self.end - datetime.now().timestamp()), 0)
+
     def get_data(self):
-        left_tsp = max(self.end - datetime.now().timestamp(), 0)
+        left_tsp = self.timestamp_left()
         hours = int(left_tsp // 3600)
         minutes = int((left_tsp - (hours * 60)) // 60)
         seconds = int((left_tsp - (hours * 60)) % 60)

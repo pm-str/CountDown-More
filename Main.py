@@ -40,7 +40,7 @@ class CountDownDialog(QDialog):
         if active_el:
             self.ui.timeStart.setDateTime(QDateTime.fromSecsSinceEpoch(int(active_el.start)))
             self.ui.timeEnd.setDateTime(QDateTime.fromSecsSinceEpoch(int(active_el.end)))
-            self.ui.blinkCheckBox.setChecked(active_el.is_blinked)
+            self.ui.blinkSpinBox.setValue(active_el.blink_before)
             self.ui.timeFormat.setText(active_el.format)
 
     def apply_slot(self):
@@ -48,13 +48,13 @@ class CountDownDialog(QDialog):
             el = Countdown()
             el.start = self.ui.timeStart.dateTime().toPyDateTime().timestamp()
             el.end = self.ui.timeEnd.dateTime().toPyDateTime().timestamp()
-            el.is_blinked = self.ui.blinkCheckBox.isChecked()
+            el.blink_before = self.ui.blinkSpinBox.value()
             el.format = self.ui.timeFormat.text()
             items_list.append(el)
         else:
             self.active_el.start = self.ui.timeStart.dateTime().toPyDateTime().timestamp()
             self.active_el.end = self.ui.timeEnd.dateTime().toPyDateTime().timestamp()
-            self.active_el.is_blinked = self.ui.blinkCheckBox.isChecked()
+            self.active_el.blink_before = self.ui.blinkSpinBox.value()
             self.active_el.format = self.ui.timeFormat.text()
 
         self.close()
@@ -146,12 +146,34 @@ class LayoutWindow(QMainWindow):
             widget.adjustSize()
             self._configure_widget(el, widget)
 
-            if el.type in [ItemType.COUNTDOWN, ItemType.CLOCK]:
+            if el.type == ItemType.CLOCK:
                 timer = QTimer(self)
-                timer.timeout.connect(partial(self._update_timers, el, widget))
-                timer.start(config.FREQUENCY)
+                timer.timeout.connect(partial(self._update_timer, el, widget))
+                timer.start(config.TIMER_UPDATE_FREQUENCY)
 
-    def _update_timers(self, el, widget):
+            if el.type == ItemType.COUNTDOWN:
+                timer = QTimer(self)
+                k = max(1, int(config.TIMER_BLINKING_FREQUENCY / config.TIMER_UPDATE_FREQUENCY))
+                timer.timeout.connect(partial(self._update_countdown, el, widget, k, timer))
+                timer.start(config.TIMER_UPDATE_FREQUENCY)
+
+    @staticmethod
+    def _update_timer(el, widget):
+        widget.setText(el.get_data())
+
+    @staticmethod
+    def _update_countdown(el: Countdown, widget: QLabel, k, timer):
+        if el.blink_before > -1 and el.timestamp_left() <= el.blink_before:
+            if el.blink_counter % k == 0:
+                if widget.isVisible():
+                    widget.hide()
+                else:
+                    widget.show()
+            el.blink_counter += 1
+
+        if el.timestamp_left() == 0 and widget.isVisible():
+            timer.stop()
+
         widget.setText(el.get_data())
 
     def _configure_widget(self, el, widget):

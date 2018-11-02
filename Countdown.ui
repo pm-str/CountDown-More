@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>384</width>
-    <height>173</height>
+    <width>406</width>
+    <height>210</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -55,8 +55,8 @@
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>140</y>
+     <x>20</x>
+     <y>170</y>
      <width>101</width>
      <height>25</height>
     </rect>
@@ -131,8 +131,8 @@
   <widget class="QPushButton" name="applyButton">
    <property name="geometry">
     <rect>
-     <x>280</x>
-     <y>140</y>
+     <x>290</x>
+     <y>170</y>
      <width>89</width>
      <height>25</height>
     </rect>
@@ -150,35 +150,20 @@ background-color: rgb(255, 255, 255, 50%);</string>
     <rect>
      <x>10</x>
      <y>100</y>
-     <width>111</width>
-     <height>25</height>
+     <width>231</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="text">
-    <string>Blink on finish</string>
-   </property>
-  </widget>
-  <widget class="QCheckBox" name="blinkCheckBox">
-   <property name="geometry">
-    <rect>
-     <x>220</x>
-     <y>100</y>
-     <width>21</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checked">
-    <bool>true</bool>
+    <string>Blink at the end
+Sec before (disabled = -1)</string>
    </property>
   </widget>
   <widget class="QPushButton" name="cancelButton">
    <property name="geometry">
     <rect>
-     <x>180</x>
-     <y>140</y>
+     <x>190</x>
+     <y>170</y>
      <width>89</width>
      <height>25</height>
     </rect>
@@ -191,12 +176,30 @@ background-color: rgb(255, 255, 255, 50%);</string>
     <string>Cancel</string>
    </property>
   </widget>
+  <widget class="QSpinBox" name="blinkSpinBox">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>110</y>
+     <width>91</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="specialValueText">
+    <string/>
+   </property>
+   <property name="minimum">
+    <number>-1</number>
+   </property>
+   <property name="value">
+    <number>-1</number>
+   </property>
+  </widget>
  </widget>
  <tabstops>
   <tabstop>timeStart</tabstop>
   <tabstop>timeEnd</tabstop>
   <tabstop>timeFormat</tabstop>
-  <tabstop>blinkCheckBox</tabstop>
   <tabstop>cancelButton</tabstop>
   <tabstop>applyButton</tabstop>
  </tabstops>

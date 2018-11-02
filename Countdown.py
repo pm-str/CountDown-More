@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(384, 173)
+        Dialog.resize(406, 210)
         self.label = QtWidgets.QLabel(Dialog)
         self.label.setGeometry(QtCore.QRect(10, 10, 111, 26))
         self.label.setObjectName("label")
@@ -22,7 +22,7 @@ class Ui_Dialog(object):
         self.timeFormat.setGeometry(QtCore.QRect(220, 70, 151, 25))
         self.timeFormat.setObjectName("timeFormat")
         self.label_3 = QtWidgets.QLabel(Dialog)
-        self.label_3.setGeometry(QtCore.QRect(10, 140, 101, 25))
+        self.label_3.setGeometry(QtCore.QRect(20, 170, 101, 25))
         font = QtGui.QFont()
         font.setBold(False)
         font.setUnderline(True)
@@ -44,23 +44,24 @@ class Ui_Dialog(object):
         self.label_4.setGeometry(QtCore.QRect(10, 70, 111, 25))
         self.label_4.setObjectName("label_4")
         self.applyButton = QtWidgets.QPushButton(Dialog)
-        self.applyButton.setGeometry(QtCore.QRect(280, 140, 89, 25))
+        self.applyButton.setGeometry(QtCore.QRect(290, 170, 89, 25))
         self.applyButton.setStyleSheet("\n"
 "background-color: rgb(255, 255, 255, 50%);")
         self.applyButton.setObjectName("applyButton")
         self.label_5 = QtWidgets.QLabel(Dialog)
-        self.label_5.setGeometry(QtCore.QRect(10, 100, 111, 25))
+        self.label_5.setGeometry(QtCore.QRect(10, 100, 231, 41))
         self.label_5.setObjectName("label_5")
-        self.blinkCheckBox = QtWidgets.QCheckBox(Dialog)
-        self.blinkCheckBox.setGeometry(QtCore.QRect(220, 100, 21, 25))
-        self.blinkCheckBox.setText("")
-        self.blinkCheckBox.setChecked(True)
-        self.blinkCheckBox.setObjectName("blinkCheckBox")
         self.cancelButton = QtWidgets.QPushButton(Dialog)
-        self.cancelButton.setGeometry(QtCore.QRect(180, 140, 89, 25))
+        self.cancelButton.setGeometry(QtCore.QRect(190, 170, 89, 25))
         self.cancelButton.setStyleSheet("\n"
 "background-color: rgb(255, 255, 255, 50%);")
         self.cancelButton.setObjectName("cancelButton")
+        self.blinkSpinBox = QtWidgets.QSpinBox(Dialog)
+        self.blinkSpinBox.setGeometry(QtCore.QRect(280, 110, 91, 26))
+        self.blinkSpinBox.setSpecialValueText("")
+        self.blinkSpinBox.setMinimum(-1)
+        self.blinkSpinBox.setProperty("value", -1)
+        self.blinkSpinBox.setObjectName("blinkSpinBox")
 
         self.retranslateUi(Dialog)
         self.cancelButton.clicked.connect(Dialog.close)
@@ -68,8 +69,7 @@ class Ui_Dialog(object):
         QtCore.QMetaObject.connectSlotsByName(Dialog)
         Dialog.setTabOrder(self.timeStart, self.timeEnd)
         Dialog.setTabOrder(self.timeEnd, self.timeFormat)
-        Dialog.setTabOrder(self.timeFormat, self.blinkCheckBox)
-        Dialog.setTabOrder(self.blinkCheckBox, self.cancelButton)
+        Dialog.setTabOrder(self.timeFormat, self.cancelButton)
         Dialog.setTabOrder(self.cancelButton, self.applyButton)
 
     def retranslateUi(self, Dialog):
@@ -83,6 +83,7 @@ class Ui_Dialog(object):
         self.timeEnd.setDisplayFormat(_translate("Dialog", "hh:mm:ss"))
         self.label_4.setText(_translate("Dialog", "Format"))
         self.applyButton.setText(_translate("Dialog", "Apply"))
-        self.label_5.setText(_translate("Dialog", "Blink on finish"))
+        self.label_5.setText(_translate("Dialog", "Blink at the end\n"
+"Sec before (disabled = -1)"))
         self.cancelButton.setText(_translate("Dialog", "Cancel"))
 
