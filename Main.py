@@ -1,3 +1,4 @@
+import pickle
 import sys
 from functools import partial
 from typing import List, Union
@@ -14,6 +15,7 @@ from Clocks import Ui_Dialog as ClocksUi
 from About import Ui_Dialog as AboutUi
 from MainMenu import Ui_BackgroundCountdown as MainMenuUi
 from Layout import Ui_MainWindow as LayoutUi
+from Settings import Ui_Dialog as SettingsUi
 from PositionLayout import Ui_PositionLayout as PositionLayoutUi
 from structures import RichText, ItemType, Countdown, ClocksData
 import utils
@@ -103,6 +105,24 @@ class AboutDialog(QDialog):
         super().__init__()
         self.ui = AboutUi()
         self.ui.setupUi(self)
+
+
+class SettingsDialog(QDialog):
+    def __init__(self):
+        super().__init__()
+        self.ui = SettingsUi()
+        self.ui.setupUi(self)
+        self.ui.blinkingFrLineEdit.setText(str(config.TIMER_BLINKING_FREQUENCY))
+        self.ui.updateFrLineEdit.setText(str(config.TIMER_UPDATE_FREQUENCY))
+
+    def apply_slot(self):
+        try:
+            config.TIMER_BLINKING_FREQUENCY = int(self.ui.blinkingFrLineEdit.text())
+            config.TIMER_UPDATE_FREQUENCY = int(self.ui.updateFrLineEdit.text())
+        except:
+            err_m = CustomErrorMessageBox("Error. Non-digit values.")
+            err_m.exec_()
+            return
 
 
 class LayoutWindow(QMainWindow):
@@ -627,10 +647,36 @@ class QMainMenu(QMainWindow):
         self.ui.fileLabel.setText("no file")
 
     def action_export_slot(self):
-        pass
+        name, _ = QFileDialog.getSaveFileName(self, 'Save File')
+
+        print(name)
+
+        data = []
+        for item in items_list:
+            key_value = {}
+            for key, value in vars(item).items():
+                key_value[key] = value
+            data.append(key_value)
+        print(data)
+        pickle.dump(data, open(name, "wb"))
 
     def action_import_slot(self):
-        pass
+        name, _ = QFileDialog.getOpenFileName(None, "Select imported file")
+        data = pickle.load(open(name, "rb"))
+
+        for item in data:
+            if item['type'] == ItemType.COUNTDOWN:
+                el = Countdown()
+            elif item['type'] == ItemType.TEXT:
+                el = RichText()
+            else:
+                el = ClocksData()
+
+            for key, value in item.items():
+                    setattr(el, key, value)
+
+            items_list.append(el)
+            self._update_items_list()
 
     def action_about_slot(self):
         print('asdf')
@@ -639,7 +685,9 @@ class QMainMenu(QMainWindow):
         w.exec_()
 
     def action_settings_slot(self):
-        pass
+        w = SettingsDialog()
+        w.show()
+        w.exec_()
 
 
 if __name__ == '__main__':

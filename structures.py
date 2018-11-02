@@ -10,21 +10,22 @@ class ItemType:
 
 
 class AbstractItem(abc.ABC):
-    has_changed = False
-    ratio_x: float = 0
-    ratio_y: float = 0
-    size: int = 30
-    color: str = None
-    font: str = None
-    is_bold: bool = False
-    is_italic: bool = False
-    is_underline: bool = False
+    def __init__(self):
+        self.has_changed = False
+        self.ratio_x: float = 0
+        self.ratio_y: float = 0
+        self.size: int = 30
+        self.color: str = None
+        self.font: str = None
+        self.is_bold: bool = False
+        self.is_italic: bool = False
+        self.is_underline: bool = False
 
-    # shadow effect must be >= 0 and <= 8
-    shadow_blur: int = 0
-    shadow_offset: int = 0
+        # shadow effect must be >= 0 and <= 8
+        self.shadow_blur: int = 0
+        self.shadow_offset: int = 0
 
-    type: str = ItemType.ABSTRACT
+        self.type: str = ItemType.ABSTRACT
 
     def __str__(self):
         raise NotImplementedError
@@ -34,10 +35,12 @@ class AbstractItem(abc.ABC):
 
 
 class RichText(AbstractItem):
-    text: str = ''
-    type = ItemType.TEXT
-    _trunc_length = 30
-    prefix = 'T'
+    def __init__(self):
+        super().__init__()
+        self.text: str = ''
+        self.type = ItemType.TEXT
+        self._trunc_length = 30
+        self.prefix = 'T'
 
     def __str__(self):
         if len(self.text) < self._trunc_length:
@@ -49,10 +52,12 @@ class RichText(AbstractItem):
 
 
 class ClocksData(AbstractItem):
-    fmt: str = None
-    prefix = 'C'
+    def __init__(self):
+        super().__init__()
+        self.fmt: str = None
+        self.prefix = 'C'
 
-    type = ItemType.CLOCK
+        self.type = ItemType.CLOCK
 
     @staticmethod
     def now_in_fmt(fmt: str):
@@ -66,12 +71,14 @@ class ClocksData(AbstractItem):
 
 
 class Countdown(AbstractItem):
-    start: float = None
-    end: float = None
-    format: str = None
-    blink_before: int = -1
-    type = ItemType.COUNTDOWN
-    prefix = 'D'
+    def __init__(self):
+        super().__init__()
+        self.start: float = None
+        self.end: float = None
+        self.format: str = None
+        self.blink_before: int = -1
+        self.type = ItemType.COUNTDOWN
+        self.prefix = 'D'
 
     # for blinking, inner counter
     blink_counter = 0
