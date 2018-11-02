@@ -440,7 +440,7 @@ background-color: rgb(255, 255, 255, 90%);</string>
   </connection>
   <connection>
    <sender>actionExport</sender>
-   <signal>toggled(bool)</signal>
+   <signal>triggered()</signal>
    <receiver>BackgroundCountdown</receiver>
    <slot>action_export_slot()</slot>
    <hints>
@@ -456,7 +456,7 @@ background-color: rgb(255, 255, 255, 90%);</string>
   </connection>
   <connection>
    <sender>actionImport</sender>
-   <signal>toggled(bool)</signal>
+   <signal>triggered()</signal>
    <receiver>BackgroundCountdown</receiver>
    <slot>action_import_slot()</slot>
    <hints>
@@ -472,9 +472,25 @@ background-color: rgb(255, 255, 255, 90%);</string>
   </connection>
   <connection>
    <sender>actionSettings</sender>
-   <signal>toggled(bool)</signal>
+   <signal>triggered()</signal>
    <receiver>BackgroundCountdown</receiver>
    <slot>action_settings_slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>367</x>
+     <y>237</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionAbout</sender>
+   <signal>triggered()</signal>
+   <receiver>BackgroundCountdown</receiver>
+   <slot>action_about_slot()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>

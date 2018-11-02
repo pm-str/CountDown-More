@@ -118,9 +118,10 @@ class Ui_BackgroundCountdown(object):
         self.createCountdButton.clicked.connect(BackgroundCountdown.create_countdown_slot)
         self.createTextButton.clicked.connect(BackgroundCountdown.create_text_slot)
         self.createClocksButton.clicked.connect(BackgroundCountdown.create_clocks_slot)
-        self.actionExport.toggled['bool'].connect(BackgroundCountdown.action_export_slot)
-        self.actionImport.toggled['bool'].connect(BackgroundCountdown.action_import_slot)
-        self.actionSettings.toggled['bool'].connect(BackgroundCountdown.action_settings_slot)
+        self.actionExport.triggered.connect(BackgroundCountdown.action_export_slot)
+        self.actionImport.triggered.connect(BackgroundCountdown.action_import_slot)
+        self.actionSettings.triggered.connect(BackgroundCountdown.action_settings_slot)
+        self.actionAbout.triggered.connect(BackgroundCountdown.action_about_slot)
         QtCore.QMetaObject.connectSlotsByName(BackgroundCountdown)
 
     def retranslateUi(self, BackgroundCountdown):

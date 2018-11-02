@@ -11,6 +11,7 @@ import config
 from Countdown import Ui_Dialog as CountdownUi
 from RichText import Ui_Dialog as RichTextUi
 from Clocks import Ui_Dialog as ClocksUi
+from About import Ui_Dialog as AboutUi
 from MainMenu import Ui_BackgroundCountdown as MainMenuUi
 from Layout import Ui_MainWindow as LayoutUi
 from PositionLayout import Ui_PositionLayout as PositionLayoutUi
@@ -95,6 +96,13 @@ class ClocksDialog(QDialog):
 
         items_list.append(clock_item)
         self.close()
+
+
+class AboutDialog(QDialog):
+    def __init__(self):
+        super().__init__()
+        self.ui = AboutUi()
+        self.ui.setupUi(self)
 
 
 class LayoutWindow(QMainWindow):
@@ -625,7 +633,10 @@ class QMainMenu(QMainWindow):
         pass
 
     def action_about_slot(self):
-        pass
+        print('asdf')
+        w = AboutDialog()
+        w.show()
+        w.exec_()
 
     def action_settings_slot(self):
         pass
