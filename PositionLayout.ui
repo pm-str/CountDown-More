@@ -20,7 +20,7 @@
       <x>10</x>
       <y>10</y>
       <width>151</width>
-      <height>431</height>
+      <height>541</height>
      </rect>
     </property>
     <property name="autoFillBackground">
@@ -291,6 +291,62 @@ border-color: rgb(238, 238, 236);</string>
       <string>Text color</string>
      </property>
     </widget>
+    <widget class="QWidget" name="verticalLayoutWidget_5">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>417</y>
+       <width>141</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_4">
+      <property name="leftMargin">
+       <number>5</number>
+      </property>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_6">
+        <item>
+         <widget class="QLabel" name="label_6">
+          <property name="text">
+           <string>Shadow
+Offset</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="shadowOffsetSpinBox">
+          <property name="maximum">
+           <number>9999</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <property name="leftMargin">
+         <number>5</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="label_5">
+          <property name="text">
+           <string>Shadow
+Blur</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="shadowBlurSpinBox">
+          <property name="maximum">
+           <number>8</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
    </widget>
   </widget>
  </widget>
@@ -504,6 +560,38 @@ border-color: rgb(238, 238, 236);</string>
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>shadowBlurSpinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>PositionLayout</receiver>
+   <slot>update_shadow_blur_slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>117</x>
+     <y>439</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>shadowOffsetSpinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>PositionLayout</receiver>
+   <slot>update_shadow_offset_slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>117</x>
+     <y>445</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>center_slot()</slot>
@@ -515,5 +603,7 @@ border-color: rgb(238, 238, 236);</string>
   <slot>update_font_slot()</slot>
   <slot>update_Y_axis_slot()</slot>
   <slot>change_color_slot()</slot>
+  <slot>update_shadow_blur_slot()</slot>
+  <slot>update_shadow_offset_slot()</slot>
  </slots>
 </ui>

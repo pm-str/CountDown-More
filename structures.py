@@ -20,6 +20,10 @@ class AbstractItem(abc.ABC):
     is_italic: bool = False
     is_underline: bool = False
 
+    # shadow effect must be >= 0 and <= 8
+    shadow_blur: int = 0
+    shadow_offset: int = 0
+
     type: str = ItemType.ABSTRACT
 
     def __str__(self):

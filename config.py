@@ -1,0 +1,2 @@
+# milliseconds
+FREQUENCY = 20

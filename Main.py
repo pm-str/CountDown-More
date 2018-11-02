@@ -1,10 +1,13 @@
 import sys
+from functools import partial
 from typing import List, Union
 
 from PyQt5.QtGui import QFont
-from PyQt5.QtCore import QDateTime, QRect, Qt
-from PyQt5.QtWidgets import QApplication, QDialog, QFileDialog, QMainWindow, QMessageBox, QLabel, QColorDialog, QDesktopWidget
+from PyQt5.QtCore import QDateTime, QRect, Qt, QTimer
+from PyQt5.QtWidgets import (QApplication, QDialog, QFileDialog, QMainWindow, QMessageBox, QLabel,
+                             QColorDialog, QGraphicsDropShadowEffect)
 
+import config
 from Countdown import Ui_Dialog as CountdownUi
 from RichText import Ui_Dialog as RichTextUi
 from Clocks import Ui_Dialog as ClocksUi
@@ -143,6 +146,14 @@ class LayoutWindow(QMainWindow):
             widget.adjustSize()
             self._configure_widget(el, widget)
 
+            if el.type in [ItemType.COUNTDOWN, ItemType.CLOCK]:
+                timer = QTimer(self)
+                timer.timeout.connect(partial(self._update_timers, el, widget))
+                timer.start(config.FREQUENCY)
+
+    def _update_timers(self, el, widget):
+        widget.setText(el.get_data())
+
     def _configure_widget(self, el, widget):
         w, h = widget.geometry().width(), widget.geometry().height()
         widget.setGeometry(
@@ -162,6 +173,16 @@ class LayoutWindow(QMainWindow):
             font.setItalic(True)
         if el.is_underline:
             font.setUnderline(True)
+        if el.shadow_blur or el.shadow_offset:
+            eff = QGraphicsDropShadowEffect()
+            eff.setBlurRadius(el.shadow_blur)
+            eff.setOffset(el.shadow_offset)
+            widget.setGraphicsEffect(eff)
+        if el.shadow_offset or el.shadow_blur:
+            eff = QGraphicsDropShadowEffect()
+            eff.setBlurRadius(el.shadow_blur)
+            eff.setOffset(el.shadow_offset)
+            widget.setGraphicsEffect(eff)
         widget.setFont(font)
         widget.adjustSize()
 
@@ -310,6 +331,13 @@ class PositionItemsWindow(QMainWindow):
             font.setPointSize(self.current_el.size)
         if self.current_el.is_bold:
             font.setBold(True)
+        if self.current_el.shadow_offset or self.current_el.shadow_blur:
+            eff = QGraphicsDropShadowEffect()
+            eff.setBlurRadius(self.current_el.shadow_blur)
+            eff.setOffset(self.current_el.shadow_offset)
+            self.current_w.setGraphicsEffect(eff)
+            self.ui.shadowBlurSpinBox.setValue(self.current_el.shadow_blur)
+            self.ui.shadowOffsetSpinBox.setValue(self.current_el.shadow_offset)
         if self.current_el.is_italic:
             font.setItalic(True)
         if self.current_el.is_underline:
@@ -330,6 +358,8 @@ class PositionItemsWindow(QMainWindow):
 
     def _setup_fields_with_widget(self):
         self._update_font_checkboxes()
+        self.ui.shadowBlurSpinBox.setValue(self.current_el.shadow_blur)
+        self.ui.shadowOffsetSpinBox.setValue(self.current_el.shadow_offset)
 
         font = self.current_w.font()
         font.setPointSize(self.current_el.size)
@@ -411,6 +441,24 @@ class PositionItemsWindow(QMainWindow):
         utils.set_widget_stylesheet(self.current_w, f'color: {color.name()}')
         self.current_el.color = color.name()
 
+    def update_shadow_blur_slot(self):
+        blur = self.ui.shadowBlurSpinBox.value()
+
+        eff = QGraphicsDropShadowEffect()
+        eff.setBlurRadius(blur)
+
+        self.current_el.shadow_blur = blur
+        self.current_w.setGraphicsEffect(eff)
+
+    def update_shadow_offset_slot(self):
+        offset = self.ui.shadowOffsetSpinBox.value()
+
+        eff = QGraphicsDropShadowEffect()
+        eff.setOffset(offset)
+
+        self.current_el.shadow_offset = offset
+        self.current_w.setGraphicsEffect(eff)
+
     def update_font_slot(self):
         font = QFont()
 
@@ -455,6 +503,10 @@ class PositionItemsWindow(QMainWindow):
 
         if self.current_el.ratio_y and self.current_el.ratio_x:
             self._update_widget_position()
+
+    def keyPressEvent(self, event):
+        if event.key() == Qt.Key_Escape:
+            self.close()
 
 
 class QMainMenu(QMainWindow):
