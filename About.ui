@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>263</height>
+    <height>241</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -36,14 +36,20 @@
        <string notr="true">&lt;a href=\&quot;https://github.com/pm-str/CountDown-More\&quot;&gt;CountDown &amp; More&lt;/font&gt; &lt;/a&gt;</string>
       </property>
       <property name="text">
-       <string>GitHub: &lt;a href=&quot;https://github.com/pm-str/CountDown-More&quot;&gt;CountDown &amp; More&lt;/a&gt;</string>
+       <string>GitHub:  &lt;a href=&quot;https://github.com/pm-str/CountDown-and-More&quot;&gt;CountDown &amp; More&lt;/a&gt;</string>
+      </property>
+      <property name="openExternalLinks">
+       <bool>true</bool>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QLabel" name="label_3">
       <property name="text">
-       <string>Contacts: &lt;a href=&quot;pavl.mikhail@gmail.com&quot;&gt;pavl.mikhail@gmail.com&lt;/a&gt;</string>
+       <string>Contacts: &lt;a href=&quot;mailto:pavl.mikhail@gmail.com&quot;&gt;pavl.mikhail@gmail.com&lt;/a&gt;</string>
+      </property>
+      <property name="openExternalLinks">
+       <bool>true</bool>
       </property>
      </widget>
     </item>
@@ -68,7 +74,7 @@ Recommendations and suggestions are welcome.</string>
    <property name="geometry">
     <rect>
      <x>160</x>
-     <y>220</y>
+     <y>200</y>
      <width>89</width>
      <height>25</height>
     </rect>

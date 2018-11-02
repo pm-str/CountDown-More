@@ -12,6 +12,9 @@ class Ui_BackgroundCountdown(object):
     def setupUi(self, BackgroundCountdown):
         BackgroundCountdown.setObjectName("BackgroundCountdown")
         BackgroundCountdown.resize(735, 476)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/static/image.ico/image.ico"), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        BackgroundCountdown.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(BackgroundCountdown)
         self.centralwidget.setObjectName("centralwidget")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
@@ -50,7 +53,7 @@ class Ui_BackgroundCountdown(object):
         self.fileLabel.setText("")
         self.fileLabel.setObjectName("fileLabel")
         self.itemsList = QtWidgets.QListWidget(self.centralwidget)
-        self.itemsList.setGeometry(QtCore.QRect(410, 0, 321, 431))
+        self.itemsList.setGeometry(QtCore.QRect(410, 10, 321, 411))
         font = QtGui.QFont()
         font.setPointSize(14)
         self.itemsList.setFont(font)
@@ -144,3 +147,4 @@ class Ui_BackgroundCountdown(object):
         self.actionSettings.setText(_translate("BackgroundCountdown", "Settings"))
         self.actionAbout.setText(_translate("BackgroundCountdown", "About"))
 
+import theme_rc

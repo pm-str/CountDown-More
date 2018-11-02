@@ -13,6 +13,11 @@
   <property name="windowTitle">
    <string>CountDown &amp; More</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normalon>:/static/image.ico/image.ico</normalon>
+   </iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="label_3">
     <property name="geometry">
@@ -276,7 +281,9 @@ background-color: rgb(255, 255, 255, 90%);</string>
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="static/theme.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>deleteButton</sender>

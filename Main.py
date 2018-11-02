@@ -128,6 +128,8 @@ class SettingsDialog(QDialog):
 class LayoutWindow(QMainWindow):
     def __init__(self, path, error=None):
         super().__init__()
+
+        self.widgets_list = []
         self.ui = LayoutUi()
 
         self.error = error or "Can't display selected image. Choose another."
@@ -148,8 +150,6 @@ class LayoutWindow(QMainWindow):
         self.screen_w = self.geometry().width()
         self.screen_h = self.geometry().height()
         self.setWindowState(Qt.WindowFullScreen)
-
-        self.widgets_list = []
 
         self._display_all_items()
         self.show()
@@ -238,12 +238,14 @@ class LayoutWindow(QMainWindow):
 
     def _update_widget_positions(self):
         """Update widget position due new screen resolution"""
-        for el, w in zip(items_list, self.widgets_list):
-            position = list(w.geometry().getRect())
-            position[0] = round(el.ratio_x * self.screen_w)
-            position[1] = round(el.ratio_y * self.screen_h)
 
-            w.setGeometry(QRect(*position))
+        if hasattr(self, 'widgets_list'):
+            for el, w in zip(items_list, self.widgets_list):
+                position = list(w.geometry().getRect())
+                position[0] = round(el.ratio_x * self.screen_w)
+                position[1] = round(el.ratio_y * self.screen_h)
+
+                w.setGeometry(QRect(*position))
 
     def resizeEvent(self, event):
         QMainWindow.resizeEvent(self, event)
