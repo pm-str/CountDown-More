@@ -1,7 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b88317ee-0f99-4abb-a940-439340ca6121" name="Default" comment="" />
+    <list default="true" id="b88317ee-0f99-4abb-a940-439340ca6121" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/ConfPres.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ConfPres.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/webResources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webResources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainMenu.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainMenu.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainMenu.ui" beforeDir="false" afterPath="$PROJECT_DIR$/MainMenu.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/Qt.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/QtBluetooth.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/QtCore.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/QtDBus.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/QtDesigner.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/QtGui.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/QtHelp.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/QtLocation.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/QtMultimedia.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/QtMultimediaWidgets.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/QtNetwork.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/QtNfc.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/QtOpenGL.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/QtPositioning.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/QtPrintSupport.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/QtQml.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/QtQuick.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/QtQuickWidgets.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/QtSensors.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/QtSerialPort.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/QtSql.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/QtSvg.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/QtTest.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/QtWebChannel.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/QtWebEngineCore.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/QtWebEngineWidgets.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/QtWebKit.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/QtWebKitWidgets.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/QtWebSockets.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/QtWidgets.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/QtX11Extras.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/QtXml.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/QtXmlPatterns.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/_QOpenGLFunctions_2_0.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/_QOpenGLFunctions_2_1.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/_QOpenGLFunctions_4_1_Core.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/Qt/__init__.pyi" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -10,21 +54,30 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/ConfPres$Main.coverage" NAME="Main Coverage Results" MODIFIED="1541145891348" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ConfPres$Main.coverage" NAME="Main Coverage Results" MODIFIED="1541146541331" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FavoritesManager">
     <favorites_list name="ConfPres" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="397">
-              <caret line="175" lean-forward="true" selection-start-line="175" selection-end-line="175" />
+            <state relative-caret-position="442">
+              <caret line="630" column="12" selection-start-line="630" selection-start-column="12" selection-end-line="630" selection-end-column="12" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LICENSE" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/LICENSE">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret selection-end-line="1" />
             </state>
           </provider>
         </entry>
@@ -79,13 +132,12 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>30</find>
       <find>update_wid</find>
       <find>@pro</find>
       <find>create_co</find>
       <find>print</find>
       <find>center</find>
-      <find />
+      <find>not</find>
       <find>timer</find>
       <find>get_d</find>
       <find>ESC</find>
@@ -109,6 +161,7 @@
       <find>is_blinked</find>
       <find>blinkSpinBox</find>
       <find>timer_up</find>
+      <find>mainMew</find>
     </findStrings>
     <replaceStrings>
       <replace>utils.get_ratio_max_size</replace>
@@ -121,7 +174,7 @@
     </dirStrings>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/Qt.py" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -132,6 +185,7 @@
         <option value="$PROJECT_DIR$/config.py" />
         <option value="$PROJECT_DIR$/structures.py" />
         <option value="$PROJECT_DIR$/Main.py" />
+        <option value="$PROJECT_DIR$/LICENSE" />
       </list>
     </option>
   </component>
@@ -162,12 +216,7 @@
           <expand>
             <path>
               <item name="ConfPres" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ConfPres" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ConfPres" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ConfPres" type="462c0819:PsiDirectoryNode" />
-              <item name="stubs" type="462c0819:PsiDirectoryNode" />
+              <item name="ConfPres" type="47feb1d3:ProjectViewModuleNode" />
             </path>
           </expand>
           <select />
@@ -177,9 +226,10 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../stubs" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -234,15 +284,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="27" width="1533" height="873" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32884097" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.23315364" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.20350404" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.23315364" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.20350404" />
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4984985" visible="true" weight="0.21519838" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
@@ -264,6 +313,11 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/Qt.py" />
+    </ignored-roots>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -327,16 +381,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1905">
-          <caret line="127" column="49" selection-start-line="127" selection-start-column="49" selection-end-line="127" selection-end-column="49" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/PositionLayout.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1395">
@@ -645,13 +689,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/structures.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="142">
@@ -662,13 +699,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="175" lean-forward="true" selection-start-line="175" selection-end-line="175" />
+        <state relative-caret-position="442">
+          <caret line="630" column="12" selection-start-line="630" selection-start-column="12" selection-end-line="630" selection-end-column="12" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LICENSE">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="1" />
         </state>
       </provider>
     </entry>

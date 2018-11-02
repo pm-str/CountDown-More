@@ -11,7 +11,7 @@ import config
 from Countdown import Ui_Dialog as CountdownUi
 from RichText import Ui_Dialog as RichTextUi
 from Clocks import Ui_Dialog as ClocksUi
-from MainMenu import Ui_MainWindow as MainMenuUi
+from MainMenu import Ui_BackgroundCountdown as MainMenuUi
 from Layout import Ui_MainWindow as LayoutUi
 from PositionLayout import Ui_PositionLayout as PositionLayoutUi
 from structures import RichText, ItemType, Countdown, ClocksData
@@ -617,6 +617,18 @@ class QMainMenu(QMainWindow):
     def reset_image_slot(self):
         self.filePath = ""
         self.ui.fileLabel.setText("no file")
+
+    def action_export_slot(self):
+        pass
+
+    def action_import_slot(self):
+        pass
+
+    def action_about_slot(self):
+        pass
+
+    def action_settings_slot(self):
+        pass
 
 
 if __name__ == '__main__':

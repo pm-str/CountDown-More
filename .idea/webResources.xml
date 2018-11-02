@@ -2,10 +2,10 @@
 <project version="4">
   <component name="WebResourcesPaths">
     <contentEntries>
-      <entry url="file://$PROJECT_DIR$">
+      <entry url="file://$PROJECT_DIR$/../stubs">
         <entryData>
           <resourceRoots>
-            <path value="file://$PROJECT_DIR$/stubs/Qt" />
+            <path value="file://$PROJECT_DIR$/../stubs" />
           </resourceRoots>
         </entryData>
       </entry>

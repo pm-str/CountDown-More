@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>BackgroundCountdown</class>
+ <widget class="QMainWindow" name="BackgroundCountdown">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>CountDown &amp; More</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="label_3">
@@ -243,12 +243,14 @@ background-color: rgb(255, 255, 255, 90%);</string>
    </property>
    <widget class="QMenu" name="menuSettings">
     <property name="title">
-     <string>Settings</string>
+     <string>Menu</string>
     </property>
-    <addaction name="actionImport"/>
-    <addaction name="actionExport"/>
     <addaction name="separator"/>
-    <addaction name="actionCommon"/>
+    <addaction name="actionExport"/>
+    <addaction name="actionImport"/>
+    <addaction name="actionSettings"/>
+    <addaction name="separator"/>
+    <addaction name="actionAbout"/>
    </widget>
    <addaction name="menuSettings"/>
   </widget>
@@ -263,9 +265,14 @@ background-color: rgb(255, 255, 255, 90%);</string>
     <string>Export</string>
    </property>
   </action>
-  <action name="actionCommon">
+  <action name="actionSettings">
    <property name="text">
-    <string>Common</string>
+    <string>Settings</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
    </property>
   </action>
  </widget>
@@ -274,7 +281,7 @@ background-color: rgb(255, 255, 255, 90%);</string>
   <connection>
    <sender>deleteButton</sender>
    <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
+   <receiver>BackgroundCountdown</receiver>
    <slot>delete_item_slot()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -290,7 +297,7 @@ background-color: rgb(255, 255, 255, 90%);</string>
   <connection>
    <sender>choosefileButton</sender>
    <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
+   <receiver>BackgroundCountdown</receiver>
    <slot>choose_file_slot()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -306,7 +313,7 @@ background-color: rgb(255, 255, 255, 90%);</string>
   <connection>
    <sender>editButton</sender>
    <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
+   <receiver>BackgroundCountdown</receiver>
    <slot>edit_item_slot()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -322,7 +329,7 @@ background-color: rgb(255, 255, 255, 90%);</string>
   <connection>
    <sender>positionButton</sender>
    <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
+   <receiver>BackgroundCountdown</receiver>
    <slot>position_item_slot()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -338,7 +345,7 @@ background-color: rgb(255, 255, 255, 90%);</string>
   <connection>
    <sender>displayButton</sender>
    <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
+   <receiver>BackgroundCountdown</receiver>
    <slot>display_layout_slot()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -354,7 +361,7 @@ background-color: rgb(255, 255, 255, 90%);</string>
   <connection>
    <sender>resetImageButton</sender>
    <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
+   <receiver>BackgroundCountdown</receiver>
    <slot>reset_image_slot()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -370,7 +377,7 @@ background-color: rgb(255, 255, 255, 90%);</string>
   <connection>
    <sender>itemsList</sender>
    <signal>doubleClicked(QModelIndex)</signal>
-   <receiver>MainWindow</receiver>
+   <receiver>BackgroundCountdown</receiver>
    <slot>edit_item_slot()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -386,7 +393,7 @@ background-color: rgb(255, 255, 255, 90%);</string>
   <connection>
    <sender>createCountdButton</sender>
    <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
+   <receiver>BackgroundCountdown</receiver>
    <slot>create_countdown_slot()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -402,7 +409,7 @@ background-color: rgb(255, 255, 255, 90%);</string>
   <connection>
    <sender>createTextButton</sender>
    <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
+   <receiver>BackgroundCountdown</receiver>
    <slot>create_text_slot()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -418,12 +425,60 @@ background-color: rgb(255, 255, 255, 90%);</string>
   <connection>
    <sender>createClocksButton</sender>
    <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
+   <receiver>BackgroundCountdown</receiver>
    <slot>create_clocks_slot()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>80</x>
      <y>224</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>367</x>
+     <y>237</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionExport</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>BackgroundCountdown</receiver>
+   <slot>action_export_slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>367</x>
+     <y>237</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionImport</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>BackgroundCountdown</receiver>
+   <slot>action_import_slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>367</x>
+     <y>237</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionSettings</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>BackgroundCountdown</receiver>
+   <slot>action_settings_slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
     </hint>
     <hint type="destinationlabel">
      <x>367</x>
@@ -443,5 +498,9 @@ background-color: rgb(255, 255, 255, 90%);</string>
   <slot>delete_item_slot()</slot>
   <slot>edit_item_slot()</slot>
   <slot>create_clocks_slot()</slot>
+  <slot>action_import_slot()</slot>
+  <slot>action_export_slot()</slot>
+  <slot>action_settings_slot()</slot>
+  <slot>action_about_slot()</slot>
  </slots>
 </ui>
