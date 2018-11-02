@@ -40,7 +40,7 @@ class DisplayCoords:
 
     @staticmethod
     def center(widget_w, widget_h, wind_w, wind_h):
-        return wind_w // 2, wind_h // 2, widget_w, widget_h
+        return round(wind_w/2-widget_w/2), round(wind_h/2-widget_h/2), widget_w, widget_h
 
     @classmethod
     def leftup(cls, widget_w, widget_h, wind_w, wind_h):

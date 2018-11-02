@@ -10,8 +10,9 @@ class ItemType:
 
 
 class AbstractItem(abc.ABC):
-    ratio_x: float = None
-    ratio_y: float = None
+    has_changed = False
+    ratio_x: float = 0
+    ratio_y: float = 0
     size: int = 30
     color: str = None
     font: str = None

@@ -114,7 +114,11 @@ class LayoutWindow(QMainWindow):
 
         self.ui.setupUi(self)
 
+        self.screen_w = self.geometry().width()
+        self.screen_h = self.geometry().height()
         self.setWindowState(Qt.WindowFullScreen)
+
+        self.widgets_list = []
 
         self._display_all_items()
         self.show()
@@ -125,20 +129,58 @@ class LayoutWindow(QMainWindow):
             el_name = f'label__{index}'
             setattr(self.ui, el_name, QLabel(self.ui.centralwidget))
 
-            current_w: QLabel = getattr(self.ui, el_name)
+            widget: QLabel = getattr(self.ui, el_name)
+            self.widgets_list.append(widget)
+
             utils.set_widget_stylesheet(
-                current_w,
+                widget,
                 "background-color: rgb(243, 243, 243, 0%); border-width: 5px;"
                 "color: rgb(255, 255, 255);")
-            current_w.setObjectName(el_name)
-            current_w.setText(el.get_data())
+            widget.setObjectName(el_name)
+            widget.setText(el.get_data())
 
             # adjust size
-            current_w.adjustSize()
+            widget.adjustSize()
             self._configure_widget(el, widget)
 
     def _configure_widget(self, el, widget):
-        pass
+        w, h = widget.geometry().width(), widget.geometry().height()
+        widget.setGeometry(
+            QRect(round(el.ratio_x * self.screen_w),
+                  round(el.ratio_y * self.screen_h), w, h))
+
+        font = QFont()
+        font.setFamily(el.font)
+
+        if el.color:
+            utils.set_widget_stylesheet(widget, f'color: {el.color}')
+        if el.size:
+            font.setPointSize(el.size)
+        if el.is_bold:
+            font.setBold(True)
+        if el.is_italic:
+            font.setItalic(True)
+        if el.is_underline:
+            font.setUnderline(True)
+        widget.setFont(font)
+        widget.adjustSize()
+
+    def _update_widget_positions(self):
+        """Update widget position due new screen resolution"""
+        for el, w in zip(items_list, self.widgets_list):
+            position = list(w.geometry().getRect())
+            position[0] = round(el.ratio_x * self.screen_w)
+            position[1] = round(el.ratio_y * self.screen_h)
+
+            w.setGeometry(QRect(*position))
+
+    def resizeEvent(self, event):
+        QMainWindow.resizeEvent(self, event)
+
+        self.screen_w = self.geometry().width()
+        self.screen_h = self.geometry().height()
+
+        self._update_widget_positions()
 
     def keyPressEvent(self, event):
         if event.key() == Qt.Key_Escape:
@@ -169,7 +211,7 @@ class PositionItemsWindow(QMainWindow):
         except BaseException as er:
             err_m = CustomErrorMessageBox(self.error)
             err_m.exec_()
-            print(er)
+            print("Error has occurred", er)
             return
 
         self.ui.setupUi(self)
@@ -236,9 +278,9 @@ class PositionItemsWindow(QMainWindow):
             # adjust size
             self.current_w.adjustSize()
 
-            if not (isinstance(self.current_el.ratio_x, (int, float)) and
-                    isinstance(self.current_el.ratio_y, (int, float))):
+            if not self.current_el.has_changed:
                 self._setup_fields_with_widget()
+                self.current_el.has_changed = True
             else:
                 self._restore_default_values()
 
@@ -276,7 +318,6 @@ class PositionItemsWindow(QMainWindow):
         self._update_font_checkboxes()
         self.ui.sizeSpinBox.setValue(self.current_w.font().pointSizeF())
         self.ui.fontComboBox.setCurrentFont(font)
-        print('Is bold', self.current_w.font().bold())
         self.current_w.adjustSize()
 
     def _update_font_checkboxes(self):
@@ -345,10 +386,8 @@ class PositionItemsWindow(QMainWindow):
 
     def _update_el_position(self):
         el_x, el_y = self.current_w.geometry().getRect()[:2]
-        print('Ration before update el x, y', self.current_el.ratio_x, self.current_el.ratio_y, self.screen_w, self.screen_h)
         self.current_el.ratio_x = el_x / self.screen_w
         self.current_el.ratio_y = el_y / self.screen_h
-        print('Ratio x,y after update el x, y:', self.current_el.ratio_x, self.current_el.ratio_y, self.screen_w, self.screen_h)
 
     def update_X_axis_slot(self):
         x_cur = self.ui.XAxisSpinBox.value()
@@ -407,14 +446,11 @@ class PositionItemsWindow(QMainWindow):
         position = list(self.current_w.geometry().getRect())
         position[0] = round(self.current_el.ratio_x * screen_w)
         position[1] = round(self.current_el.ratio_y * screen_h)
-        print('New widget position:', position)
-        print('Widget ratio:', self.current_el.ratio_x, self.current_el.ratio_y)
         self._update_axis_spinbox_values()
 
         self.current_w.setGeometry(QRect(*position))
 
     def resizeEvent(self, event):
-        print('Resize event:', self.screen_w, self.screen_h)
         QMainWindow.resizeEvent(self, event)
 
         if self.current_el.ratio_y and self.current_el.ratio_x:
