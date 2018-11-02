@@ -7,43 +7,17 @@
     <x>0</x>
     <y>0</y>
     <width>384</width>
-    <height>173</height>
+    <height>88</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>111</width>
-     <height>26</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Start</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>40</y>
-     <width>111</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>End</string>
-   </property>
-  </widget>
   <widget class="QLineEdit" name="timeFormat">
    <property name="geometry">
     <rect>
      <x>220</x>
-     <y>70</y>
+     <y>10</y>
      <width>151</width>
      <height>25</height>
     </rect>
@@ -56,7 +30,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>140</y>
+     <y>50</y>
      <width>101</width>
      <height>25</height>
     </rect>
@@ -79,47 +53,11 @@
     <set>Qt::LinksAccessibleByMouse</set>
    </property>
   </widget>
-  <widget class="QTimeEdit" name="timeStart">
-   <property name="geometry">
-    <rect>
-     <x>220</x>
-     <y>10</y>
-     <width>151</width>
-     <height>26</height>
-    </rect>
-   </property>
-   <property name="currentSection">
-    <enum>QDateTimeEdit::HourSection</enum>
-   </property>
-   <property name="displayFormat">
-    <string>hh:mm:ss</string>
-   </property>
-  </widget>
-  <widget class="QTimeEdit" name="timeEnd">
-   <property name="geometry">
-    <rect>
-     <x>220</x>
-     <y>40</y>
-     <width>151</width>
-     <height>26</height>
-    </rect>
-   </property>
-   <property name="displayFormat">
-    <string>hh:mm:ss</string>
-   </property>
-   <property name="time">
-    <time>
-     <hour>1</hour>
-     <minute>0</minute>
-     <second>0</second>
-    </time>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>70</y>
+     <y>10</y>
      <width>111</width>
      <height>25</height>
     </rect>
@@ -132,7 +70,7 @@
    <property name="geometry">
     <rect>
      <x>280</x>
-     <y>140</y>
+     <y>50</y>
      <width>89</width>
      <height>25</height>
     </rect>
@@ -145,40 +83,11 @@ background-color: rgb(255, 255, 255, 50%);</string>
     <string>Apply</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_5">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>100</y>
-     <width>111</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Blink on finish</string>
-   </property>
-  </widget>
-  <widget class="QCheckBox" name="blinkCheckBox">
-   <property name="geometry">
-    <rect>
-     <x>220</x>
-     <y>100</y>
-     <width>21</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checked">
-    <bool>true</bool>
-   </property>
-  </widget>
   <widget class="QPushButton" name="cancelButton">
    <property name="geometry">
     <rect>
      <x>180</x>
-     <y>140</y>
+     <y>50</y>
      <width>89</width>
      <height>25</height>
     </rect>
@@ -193,10 +102,7 @@ background-color: rgb(255, 255, 255, 50%);</string>
   </widget>
  </widget>
  <tabstops>
-  <tabstop>timeStart</tabstop>
-  <tabstop>timeEnd</tabstop>
   <tabstop>timeFormat</tabstop>
-  <tabstop>blinkCheckBox</tabstop>
   <tabstop>cancelButton</tabstop>
   <tabstop>applyButton</tabstop>
  </tabstops>

@@ -7,10 +7,11 @@ from PyQt5.QtWidgets import QApplication, QDialog, QFileDialog, QMainWindow, QMe
 
 from Countdown import Ui_Dialog as CountdownUi
 from RichText import Ui_Dialog as RichTextUi
+from Clocks import Ui_Dialog as ClocksUi
 from MainMenu import Ui_MainWindow as MainMenuUi
 from Layout import Ui_MainWindow as LayoutUi
 from PositionLayout import Ui_PositionLayout as PositionLayoutUi
-from structures import RichText, ItemType, Countdown
+from structures import RichText, ItemType, Countdown, ClocksData
 import utils
 
 
@@ -36,7 +37,7 @@ class CountDownDialog(QDialog):
         if active_el:
             self.ui.timeStart.setDateTime(QDateTime.fromSecsSinceEpoch(int(active_el.start)))
             self.ui.timeEnd.setDateTime(QDateTime.fromSecsSinceEpoch(int(active_el.end)))
-            self.ui.reverseCheckBox.setChecked(active_el.is_reversed)
+            self.ui.blinkCheckBox.setChecked(active_el.is_blinked)
             self.ui.timeFormat.setText(active_el.format)
 
     def apply_slot(self):
@@ -44,13 +45,13 @@ class CountDownDialog(QDialog):
             el = Countdown()
             el.start = self.ui.timeStart.dateTime().toPyDateTime().timestamp()
             el.end = self.ui.timeEnd.dateTime().toPyDateTime().timestamp()
-            el.is_reversed = self.ui.reverseCheckBox.isChecked()
+            el.is_blinked = self.ui.blinkCheckBox.isChecked()
             el.format = self.ui.timeFormat.text()
             items_list.append(el)
         else:
             self.active_el.start = self.ui.timeStart.dateTime().toPyDateTime().timestamp()
             self.active_el.end = self.ui.timeEnd.dateTime().toPyDateTime().timestamp()
-            self.active_el.is_reversed = self.ui.reverseCheckBox.isChecked()
+            self.active_el.is_blinked = self.ui.blinkCheckBox.isChecked()
             self.active_el.format = self.ui.timeFormat.text()
 
         self.close()
@@ -77,6 +78,22 @@ class RichTextDialog(QDialog):
         self.close()
 
 
+class ClocksDialog(QDialog):
+    def __init__(self, active_el=None):
+        super().__init__()
+        self.ui = ClocksUi()
+        self.ui.setupUi(self)
+        self.active_el = active_el
+
+    def apply_slot(self):
+        fmt = self.ui.timeFormat.text()
+        clock_item = ClocksData()
+        clock_item.fmt = fmt
+
+        items_list.append(clock_item)
+        self.close()
+
+
 class LayoutWindow(QMainWindow):
     def __init__(self, path, error=None):
         super().__init__()
@@ -98,11 +115,29 @@ class LayoutWindow(QMainWindow):
         self.ui.setupUi(self)
 
         self.setWindowState(Qt.WindowFullScreen)
-        self.show()
 
         self._display_all_items()
+        self.show()
 
     def _display_all_items(self):
+        for index, el in enumerate(items_list):
+
+            el_name = f'label__{index}'
+            setattr(self.ui, el_name, QLabel(self.ui.centralwidget))
+
+            current_w: QLabel = getattr(self.ui, el_name)
+            utils.set_widget_stylesheet(
+                current_w,
+                "background-color: rgb(243, 243, 243, 0%); border-width: 5px;"
+                "color: rgb(255, 255, 255);")
+            current_w.setObjectName(el_name)
+            current_w.setText(el.get_data())
+
+            # adjust size
+            current_w.adjustSize()
+            self._configure_widget(el, widget)
+
+    def _configure_widget(self, el, widget):
         pass
 
     def keyPressEvent(self, event):
@@ -188,25 +223,15 @@ class PositionItemsWindow(QMainWindow):
 
             el = items_list[index]
             el_name = f'label__{index}'
-            if el.type == ItemType.TEXT:
-                setattr(self.ui, el_name, QLabel(self.ui.centralwidget))
+            setattr(self.ui, el_name, QLabel(self.ui.centralwidget))
 
-                self.current_w: QLabel = getattr(self.ui, el_name)
-                utils.set_widget_stylesheet(self.current_w,
-                                      "background-color: rgb(243, 243, 243, 0%); border-width: 5px;"
-                                      "color: rgb(255, 255, 255);")
-                self.current_w.setObjectName(el_name)
-                self.current_w.setText(el.text)
-
-            elif el.type == ItemType.COUNTDOWN:
-                setattr(self.ui, el_name, QLabel(self.ui.centralwidget))
-
-                self.current_w = getattr(self.ui, el_name)
-                utils.set_widget_stylesheet(self.current_w,
-                                      "background-color: rgb(243, 243, 243, 0%); border-width: 5px;"
-                                      "color: rgb(255, 255, 255);")
-                self.current_w.setObjectName(el_name)
-                self.current_w.setText(str(el))
+            self.current_w = getattr(self.ui, el_name)
+            utils.set_widget_stylesheet(
+                self.current_w,
+                "background-color: rgb(243, 243, 243, 0%); border-width: 5px;"
+                "color: rgb(255, 255, 255);")
+            self.current_w.setObjectName(el_name)
+            self.current_w.setText(el.get_data())
 
             # adjust size
             self.current_w.adjustSize()
@@ -263,12 +288,10 @@ class PositionItemsWindow(QMainWindow):
             self.ui.italicCheckBox.setChecked(True)
 
     def _setup_fields_with_widget(self):
-        FONT_SIZE = 30
-
         self._update_font_checkboxes()
 
         font = self.current_w.font()
-        font.setPointSize(FONT_SIZE)
+        font.setPointSize(self.current_el.size)
         self.current_w.setFont(font)
 
         self.ui.sizeSpinBox.setValue(self.current_w.font().pointSizeF())
@@ -446,7 +469,11 @@ class QMainMenu(QMainWindow):
         self._update_items_list()
 
     def create_clocks_slot(self):
-        pass
+        element = ClocksDialog()
+        element.show()
+        element.exec_()
+
+        self._update_items_list()
 
     def choose_file_slot(self):
         self.filePath, _ = QFileDialog.getOpenFileName(None, "Select the one file to open", "",
@@ -485,7 +512,7 @@ class QMainMenu(QMainWindow):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
 
-    items_list: List[Union[Countdown, RichText]] = []
+    items_list: List[Union[Countdown, RichText, ClocksData]] = []
 
     w = QMainMenu()
     w.show()

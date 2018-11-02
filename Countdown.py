@@ -51,10 +51,11 @@ class Ui_Dialog(object):
         self.label_5 = QtWidgets.QLabel(Dialog)
         self.label_5.setGeometry(QtCore.QRect(10, 100, 111, 25))
         self.label_5.setObjectName("label_5")
-        self.reverseCheckBox = QtWidgets.QCheckBox(Dialog)
-        self.reverseCheckBox.setGeometry(QtCore.QRect(220, 100, 21, 25))
-        self.reverseCheckBox.setText("")
-        self.reverseCheckBox.setObjectName("reverseCheckBox")
+        self.blinkCheckBox = QtWidgets.QCheckBox(Dialog)
+        self.blinkCheckBox.setGeometry(QtCore.QRect(220, 100, 21, 25))
+        self.blinkCheckBox.setText("")
+        self.blinkCheckBox.setChecked(True)
+        self.blinkCheckBox.setObjectName("blinkCheckBox")
         self.cancelButton = QtWidgets.QPushButton(Dialog)
         self.cancelButton.setGeometry(QtCore.QRect(180, 140, 89, 25))
         self.cancelButton.setStyleSheet("\n"
@@ -65,6 +66,11 @@ class Ui_Dialog(object):
         self.cancelButton.clicked.connect(Dialog.close)
         self.applyButton.clicked.connect(Dialog.apply_slot)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
+        Dialog.setTabOrder(self.timeStart, self.timeEnd)
+        Dialog.setTabOrder(self.timeEnd, self.timeFormat)
+        Dialog.setTabOrder(self.timeFormat, self.blinkCheckBox)
+        Dialog.setTabOrder(self.blinkCheckBox, self.cancelButton)
+        Dialog.setTabOrder(self.cancelButton, self.applyButton)
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
@@ -77,6 +83,6 @@ class Ui_Dialog(object):
         self.timeEnd.setDisplayFormat(_translate("Dialog", "hh:mm:ss"))
         self.label_4.setText(_translate("Dialog", "Format"))
         self.applyButton.setText(_translate("Dialog", "Apply"))
-        self.label_5.setText(_translate("Dialog", "Reversed"))
+        self.label_5.setText(_translate("Dialog", "Blink on finish"))
         self.cancelButton.setText(_translate("Dialog", "Cancel"))
 
