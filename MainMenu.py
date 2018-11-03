@@ -8,9 +8,6 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-import theme_rc
-
-
 class Ui_BackgroundCountdown(object):
     def setupUi(self, BackgroundCountdown):
         BackgroundCountdown.setObjectName("BackgroundCountdown")
@@ -60,6 +57,7 @@ class Ui_BackgroundCountdown(object):
         font = QtGui.QFont()
         font.setPointSize(14)
         self.itemsList.setFont(font)
+        self.itemsList.setEditTriggers(QtWidgets.QAbstractItemView.DoubleClicked|QtWidgets.QAbstractItemView.EditKeyPressed)
         self.itemsList.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
         self.itemsList.setObjectName("itemsList")
         self.displayButton = QtWidgets.QPushButton(self.centralwidget)
@@ -128,6 +126,7 @@ class Ui_BackgroundCountdown(object):
         self.actionImport.triggered.connect(BackgroundCountdown.action_import_slot)
         self.actionSettings.triggered.connect(BackgroundCountdown.action_settings_slot)
         self.actionAbout.triggered.connect(BackgroundCountdown.action_about_slot)
+        self.itemsList.itemClicked['QListWidgetItem*'].connect(BackgroundCountdown.item_clicked_slot)
         QtCore.QMetaObject.connectSlotsByName(BackgroundCountdown)
 
     def retranslateUi(self, BackgroundCountdown):
@@ -149,3 +148,5 @@ class Ui_BackgroundCountdown(object):
         self.actionExport.setText(_translate("BackgroundCountdown", "Export"))
         self.actionSettings.setText(_translate("BackgroundCountdown", "Settings"))
         self.actionAbout.setText(_translate("BackgroundCountdown", "About"))
+
+import theme_rc

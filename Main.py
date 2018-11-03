@@ -7,7 +7,7 @@ from PyQt5.QtCore import QDateTime, QRect, Qt, QTimer
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import (QApplication, QColorDialog, QDialog, QFileDialog,
                              QGraphicsDropShadowEffect, QLabel, QMainWindow,
-                             QMessageBox)
+                             QMessageBox, QListWidgetItem)
 
 import config
 import utils
@@ -164,8 +164,9 @@ class LayoutWindow(QMainWindow):
         self.show()
 
     def _display_all_items(self):
-        for index, el in enumerate(items_list):
+        selected_items = list(filter(lambda x: x.is_checked, items_list))
 
+        for index, el in enumerate(selected_items):
             el_name = f'label__{index}'
             setattr(self.ui, el_name, QLabel(self.ui.centralwidget))
 
@@ -586,7 +587,15 @@ class QMainMenu(QMainWindow):
     def _update_items_list(self):
         self.ui.itemsList.clear()
         for item in items_list:
-            self.ui.itemsList.addItem(str(item))
+            itm = QListWidgetItem(str(item))
+            itm.setFlags(itm.flags() | Qt.ItemIsUserCheckable)
+            itm.setCheckState(Qt.Checked if item.is_checked else Qt.Unchecked)
+            self.ui.itemsList.addItem(itm)
+
+    def item_clicked_slot(self, item: QListWidgetItem):
+        index = self.ui.itemsList.row(item)
+        is_checked = bool(item.checkState())
+        items_list[index].is_checked = is_checked
 
     def delete_item_slot(self):
         selected = self.ui.itemsList.selectedIndexes()
@@ -634,7 +643,7 @@ class QMainMenu(QMainWindow):
     def choose_file_slot(self):
         self.filePath, _ = QFileDialog.getOpenFileName(None, "Select the one file to open", "",
                                                        "Images (*.jpg *.bmp *.png)")
-        if len(self.filePath):
+        if self.filePath:
             self.ui.fileLabel.setText(str(self.filePath)[:7] + '... ...' + str(self.filePath)[-15:])
 
     def display_layout_slot(self):
@@ -667,6 +676,9 @@ class QMainMenu(QMainWindow):
     def action_export_slot(self):
         name, _ = QFileDialog.getSaveFileName(self, 'Save File')
 
+        if not name:
+            return
+
         data = []
         for item in items_list:
             key_value = {}
@@ -677,6 +689,10 @@ class QMainMenu(QMainWindow):
 
     def action_import_slot(self):
         name, _ = QFileDialog.getOpenFileName(None, "Select imported file")
+
+        if not name:
+            return
+
         data = pickle.load(open(name, "rb"))
 
         for item in data:

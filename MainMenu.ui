@@ -157,6 +157,9 @@ background-color: rgb(255, 255, 255, 90%);</string>
       <pointsize>14</pointsize>
      </font>
     </property>
+    <property name="editTriggers">
+     <set>QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed</set>
+    </property>
     <property name="selectionMode">
      <enum>QAbstractItemView::ExtendedSelection</enum>
     </property>
@@ -509,6 +512,22 @@ background-color: rgb(255, 255, 255, 90%);</string>
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>itemsList</sender>
+   <signal>itemClicked(QListWidgetItem*)</signal>
+   <receiver>BackgroundCountdown</receiver>
+   <slot>item_clicked_slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>570</x>
+     <y>237</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>367</x>
+     <y>237</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>create_countdown_slot()</slot>
@@ -525,5 +544,6 @@ background-color: rgb(255, 255, 255, 90%);</string>
   <slot>action_export_slot()</slot>
   <slot>action_settings_slot()</slot>
   <slot>action_about_slot()</slot>
+  <slot>item_clicked_slot()</slot>
  </slots>
 </ui>

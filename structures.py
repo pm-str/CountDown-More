@@ -12,6 +12,7 @@ class ItemType:
 class AbstractItem(abc.ABC):
     def __init__(self):
         self.has_changed = False
+        self.is_checked = False
         self.ratio_x: float = 0
         self.ratio_y: float = 0
         self.size: int = 30
