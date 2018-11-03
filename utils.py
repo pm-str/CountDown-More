@@ -57,5 +57,3 @@ class DisplayCoords:
     @classmethod
     def rightdown(cls, widget_w, widget_h, wind_w, wind_h):
         return (wind_w - widget_w) * (1 - cls.THRESHOLD), (wind_h - widget_h) * (1 - cls.THRESHOLD), widget_w, widget_h
-
-

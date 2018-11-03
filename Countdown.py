@@ -8,6 +8,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
@@ -86,4 +87,3 @@ class Ui_Dialog(object):
         self.label_5.setText(_translate("Dialog", "Blink at the end\n"
 "Sec before (disabled = -1)"))
         self.cancelButton.setText(_translate("Dialog", "Cancel"))
-

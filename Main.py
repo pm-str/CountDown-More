@@ -3,22 +3,23 @@ import sys
 from functools import partial
 from typing import List, Union
 
-from PyQt5.QtGui import QFont
 from PyQt5.QtCore import QDateTime, QRect, Qt, QTimer
-from PyQt5.QtWidgets import (QApplication, QDialog, QFileDialog, QMainWindow, QMessageBox, QLabel,
-                             QColorDialog, QGraphicsDropShadowEffect)
+from PyQt5.QtGui import QFont
+from PyQt5.QtWidgets import (QApplication, QColorDialog, QDialog, QFileDialog,
+                             QGraphicsDropShadowEffect, QLabel, QMainWindow,
+                             QMessageBox)
 
 import config
-from Countdown import Ui_Dialog as CountdownUi
-from RichText import Ui_Dialog as RichTextUi
-from Clocks import Ui_Dialog as ClocksUi
-from About import Ui_Dialog as AboutUi
-from MainMenu import Ui_BackgroundCountdown as MainMenuUi
-from Layout import Ui_MainWindow as LayoutUi
-from Settings import Ui_Dialog as SettingsUi
-from PositionLayout import Ui_PositionLayout as PositionLayoutUi
-from structures import RichText, ItemType, Countdown, ClocksData
 import utils
+from About import Ui_Dialog as AboutUi
+from Clocks import Ui_Dialog as ClocksUi
+from Countdown import Ui_Dialog as CountdownUi
+from Layout import Ui_MainWindow as LayoutUi
+from MainMenu import Ui_BackgroundCountdown as MainMenuUi
+from PositionLayout import Ui_PositionLayout as PositionLayoutUi
+from RichText import Ui_Dialog as RichTextUi
+from Settings import Ui_Dialog as SettingsUi
+from structures import ClocksData, Countdown, ItemType, RichText
 
 
 class CustomErrorMessageBox(QMessageBox):
@@ -91,12 +92,20 @@ class ClocksDialog(QDialog):
         self.ui.setupUi(self)
         self.active_el = active_el
 
+        if self.active_el:
+            self.ui.timeFormat.setText(self.active_el.fmt)
+
     def apply_slot(self):
         fmt = self.ui.timeFormat.text()
-        clock_item = ClocksData()
-        clock_item.fmt = fmt
 
-        items_list.append(clock_item)
+        if not self.active_el:
+            clock_item = ClocksData()
+            clock_item.fmt = fmt
+            items_list.append(clock_item)
+        else:
+            clock_item = self.active_el
+            clock_item.fmt = fmt
+
         self.close()
 
 
@@ -284,7 +293,6 @@ class PositionItemsWindow(QMainWindow):
         except BaseException as er:
             err_m = CustomErrorMessageBox(self.error)
             err_m.exec_()
-            print("Error has occurred", er)
             return
 
         self.ui.setupUi(self)
@@ -495,18 +503,22 @@ class PositionItemsWindow(QMainWindow):
 
     def update_shadow_blur_slot(self):
         blur = self.ui.shadowBlurSpinBox.value()
+        offset = self.current_el.shadow_offset
 
         eff = QGraphicsDropShadowEffect()
         eff.setBlurRadius(blur)
+        eff.setOffset(offset)
 
         self.current_el.shadow_blur = blur
         self.current_w.setGraphicsEffect(eff)
 
     def update_shadow_offset_slot(self):
         offset = self.ui.shadowOffsetSpinBox.value()
+        blur = self.current_el.shadow_blur
 
         eff = QGraphicsDropShadowEffect()
         eff.setOffset(offset)
+        eff.setBlurRadius(blur)
 
         self.current_el.shadow_offset = offset
         self.current_w.setGraphicsEffect(eff)
@@ -605,6 +617,10 @@ class QMainMenu(QMainWindow):
             element = CountDownDialog(items_list[i])
             element.show()
             element.exec_()
+        elif items_list[i].type == ItemType.CLOCK:
+            element = ClocksDialog(items_list[i])
+            element.show()
+            element.exec_()
 
         self._update_items_list()
 
@@ -651,15 +667,12 @@ class QMainMenu(QMainWindow):
     def action_export_slot(self):
         name, _ = QFileDialog.getSaveFileName(self, 'Save File')
 
-        print(name)
-
         data = []
         for item in items_list:
             key_value = {}
             for key, value in vars(item).items():
                 key_value[key] = value
             data.append(key_value)
-        print(data)
         pickle.dump(data, open(name, "wb"))
 
     def action_import_slot(self):
@@ -681,7 +694,6 @@ class QMainMenu(QMainWindow):
             self._update_items_list()
 
     def action_about_slot(self):
-        print('asdf')
         w = AboutDialog()
         w.show()
         w.exec_()
@@ -701,4 +713,3 @@ if __name__ == '__main__':
     w.show()
 
     sys.exit(app.exec_())
-

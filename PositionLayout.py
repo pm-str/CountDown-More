@@ -8,6 +8,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+
 class Ui_PositionLayout(object):
     def setupUi(self, PositionLayout):
         PositionLayout.setObjectName("PositionLayout")
@@ -195,4 +196,3 @@ class Ui_PositionLayout(object):
 "Offset"))
         self.label_5.setText(_translate("PositionLayout", "Shadow\n"
 "Blur"))
-

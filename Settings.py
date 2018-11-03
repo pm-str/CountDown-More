@@ -8,6 +8,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
@@ -47,4 +48,3 @@ class Ui_Dialog(object):
         self.applyButton.setText(_translate("Dialog", "Apply"))
         self.label.setText(_translate("Dialog", "Timer update frequency:"))
         self.label_2.setText(_translate("Dialog", "Timer blinking frequency:"))
-

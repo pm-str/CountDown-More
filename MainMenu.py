@@ -8,6 +8,9 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+import theme_rc
+
+
 class Ui_BackgroundCountdown(object):
     def setupUi(self, BackgroundCountdown):
         BackgroundCountdown.setObjectName("BackgroundCountdown")
@@ -146,5 +149,3 @@ class Ui_BackgroundCountdown(object):
         self.actionExport.setText(_translate("BackgroundCountdown", "Export"))
         self.actionSettings.setText(_translate("BackgroundCountdown", "Settings"))
         self.actionAbout.setText(_translate("BackgroundCountdown", "About"))
-
-import theme_rc

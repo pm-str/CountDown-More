@@ -105,8 +105,3 @@ class Countdown(AbstractItem):
 
         dt = datetime(year=2000, month=1, day=1, hour=hours, minute=minutes, second=seconds)
         return dt.strftime(self.format)
-
-
-
-
-
